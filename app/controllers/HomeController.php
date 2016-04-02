@@ -14,7 +14,8 @@ class HomeController
 	}
 	public function get()
 	{
-		
+		echo $this->twig->render("index.html" , array(
+				"title" => "Bioskop"));
 	}
 }
 ?>
