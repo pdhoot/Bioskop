@@ -26,7 +26,6 @@ class Movies
 
 		$statement->execute();
 
-		$row = $statement->fetch(\PDO::FETCH_ASSOC);
 		$top = array();
 		while($row = $statement->fetch(\PDO::FETCH_ASSOC))
 		{
@@ -34,6 +33,20 @@ class Movies
 		}
 
 		return $top;
+	}
+
+	public static function get_info($id)
+	{
+		$db = self::get_db();
+
+		$statement = $db->prepare("SELECT * FROM MOVIE_DB WHERE id=:id");
+		$statement->bindValue(":id" , $id);
+
+		$statement->execute();
+
+		$info = $statement->fetch(\PDO::FETCH_ASSOC);
+
+		return $info;
 	}
 
 }

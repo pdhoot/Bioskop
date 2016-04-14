@@ -4,19 +4,20 @@
 		<title>{{title}}</title>
 	</head>
 	<body>
-	<h3 style="color:red">Movie name</h3>
-	<div style="font:italic">
-		
-	</div>
-	<h3 style="color:red">Description</h3>
-	<div style="font:italic">
-		
-	</div>
-	<h3 style="color:red">Genre</h3>
+	<h3>Movie name</h3>
+	<p> {{info.movie}} </p>
+
+	<h3>Description</h3>
+
+	<h3>Genre</h3>
+	{% for g in genre %}
+	<li>{{g}}</li>
+	{% endfor %}
 	<div>
 		
 	</div>
-	<h3 style="color:red">Rating</h3>
+	<h3>Rating</h3>
+	<p>{{info.rating|number_format(2)}}</p>
 	<div>
 		
 	</div>
