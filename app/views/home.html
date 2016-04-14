@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<!-- <title>{{top}}</title> -->
+	</head>
+	<body>
+		<p> Welcome to Bioskop! </p>
+		<p> Signup or Login </p>
+		<p> Warna bhaad mein jao! </p>
+
+		<p> Top 10 rated movies </p>
+
+		<ul>
+			{% for m in top %}
+			<li>{{m.movie}}</li>
+			{% endfor %}
+		</ul>
+	</body>
+</html>			

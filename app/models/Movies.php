@@ -3,50 +3,37 @@
 namespace Models;
 
 class Movies
-{   private $con;
+{
 	public  function __construct()
 	{ 
+
 	}
-	public static function getDB()
+
+	public static function get_db()
 	{
 		include "../config/config.php";
-		var_dump($configs);
 		return new \PDO("mysql:dbname=".$configs['db_name'].";host=".$configs['host'] ,  $configs['username'] , $configs['password']);
 	}
-	
-	public function getTop()
+
+
+	public static function get_top()
 	{
-	  if(conn())
-	  {
-        
-	  }
+		$db = self::get_db();
+
+		$statement = $db->prepare("SELECT * FROM MOVIE_DB ORDER BY rating DESC LIMIT 10");
+		$statement->bindValue(":username" , $username);
+		$statement->bindValue(":passhash" , $passhash);
+
+		$statement->execute();
+
+		$row = $statement->fetch(\PDO::FETCH_ASSOC);
+		$top = array();
+		while($row = $statement->fetch(\PDO::FETCH_ASSOC))
+		{
+			$top[] =  $row;
+		}
+
+		return $top;
 	}
-	public function getRecommended()
-	{
-	  if(conn)
-	  {
-        
-	  }
-	}
-	public function getRecent()
-	{
-	  if(conn)
-	  {
-        
-	  }
-	}
-	public function getResults()
-	{
-	  if(conn)
-	  {
-        
-	  }
-	}
-	public function getTagResults()
-	{
-	  if(conn)
-	  {
-        
-	  }
-	}
+
 }

@@ -15,55 +15,58 @@ class HomeController
 	}
 	public function get()
 	{
-		echo $this->twig->render("index.html" , array(
+		session_start();
+		if(isset($_SESSION["username"]))
+		{
+			$top = Movies::get_top();
+			echo $this->twig->render("home.html" , array(
+				"top" => $top));
+		}
+		else
+		{
+			echo $this->twig->render("index.html" , array(
 				"title" => "Bioskop"));
+		}
 	}
 	public function post()
 	{  
 		if(isset($_POST['login']))
-		{
-			$x = Movies::getDB();   
+		{ 
 			$username=$_POST['username'];
 			$password=$_POST['password'];
-			$valid=Users::checkLogin($username,$password);
+			$valid=Users::check_login($username,$password);
 			if($valid)
 			{
-			   echo "correct usr";
-				
+				session_start();
+				$_SESSION["username"] = $username;
+				header("Location: /");
 			}
 			else 
 				echo "sryyy";
 		}
-		/*if(isset($_POST['sign_up']))
+		else if(isset($_POST["sign_up"]))
 		{
-			   
-		   $username=$_POST['username'];
-		   $password=$_POST['password'];
-		   $done=Users::addUser($username,$password);
-		   if($done)
-		   {
-				echo "User added";
-		   }
-			else echo "some error is there";
+			$username = $_POST['username'];
+			$password = $_POST['password'];
+			// $sex = $_POST['sex'];
+			// $age = $_POST['age'];
+			// $occu = $_POST['occu'];
+
+			$valid = Users::insert_user($username, $password);
+
+			if($valid==2)
+			{
+				echo "User already exists!";
+			}
+			else if($valid==1)
+			{
+				echo "Success!";
+			}
+			else
+			{
+				echo "Error!";
+			}
 		}
-		if(isset['getTop'])
-		{
-		   $list=Movies::getTop();
-		   if(!empty($list))
-			 {
-			 
-			 }
-			 else echo "error";
-		}
-		if(isset['getR'])
-		{
-		  $list=Movies::getRecommended();
-		   if(!empty($list))
-			 {
-			 
-			 }
-			 else echo "error";
-		}*/
 	}
 }
 	

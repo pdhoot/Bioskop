@@ -3,20 +3,11 @@
 namespace Models;
 
 class Users
-{   private $conn;
+{ 
+
 	public  function __construct()
 	{ 
-          //echo "jidl";
-	}
-	public static function checkLogin($username,$password)
-	{  
-	    if($username=='888' && $password=='999')
-	      return true;
-	      else return false;
-	}
-	public function addUser($username,$password)
-	{
-	    return true;
+
 	}
 
 	public static function get_db()
@@ -47,6 +38,45 @@ class Users
 			return false;
 		}
 
+	}
+
+	public static function insert_user($username, $password, $sex='M', $age=0, $occu=1)
+	{
+		$db = self::get_db();
+
+		$stat = $db->prepare("SELECT * FROM USER_DB WHERE username = :username");
+
+		$stat->bindValue(":username" , $username);
+
+		$stat->execute();
+
+		$row = $stat->fetch(\PDO::FETCH_ASSOC);
+
+		if($row)
+		{
+			return 2;
+		}
+
+		$passhash = md5($password);
+
+		$statement = $db->prepare("INSERT INTO USER_DB (username , password  , gender , age, occu) VALUES (:username , :password  , :sex , :age, :occu)");
+
+		$result = $statement->execute(array(
+			"username"=>$username,
+			"password"=>$passhash,
+			"sex"=>$sex,
+			"age"=>$age,
+			"occu"=>$occu));
+		if($result)
+		{
+			session_start();
+			$_SESSION['username'] = $username;
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 
 }
