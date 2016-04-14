@@ -39,8 +39,10 @@ class HomeController
 			else
 			{
 				$top = Movies::get_top();
+				$recommended_movies = Movies::get_recommended_movies($_SESSION["username"]);
 				echo $this->twig->render("home.html" , array(
-				"top" => $top));
+				"top" => $top,
+				"reco"=> $recommended_movies));
 			}
 		}
 		else

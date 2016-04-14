@@ -5,9 +5,10 @@
 	</head>
 
 	<body>
-	<ul>
-	{% for r in result %}
-	<li>{{r.movie}}</li>
-	{% endfor %}
-	</ul>
+		<ul>
+			{% for r in result %}
+				<li><a href="/movie/{{r.id}}">{{r.movie}}</a></li>
+			{% endfor %}
+		</ul>
 	</body>
+</html>

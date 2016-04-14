@@ -20,7 +20,7 @@ class Movies
 	{
 		$db = self::get_db();
 
-		$statement = $db->prepare("SELECT * FROM MOVIE_DB ORDER BY rating DESC LIMIT 9");
+		$statement = $db->prepare("SELECT * FROM MOVIE_DB ORDER BY rating DESC LIMIT 10");
 
 		$statement->execute();
 
@@ -49,26 +49,160 @@ class Movies
 	public function get_result($query,$tag)
 	{
 		$db = self::get_db();
-        $query="%".$query."%";
-        if($tag)
-        {
-        $statement = $db->prepare("SELECT * FROM MOVIE_DB WHERE genre Like :movie");
-        }
-        else
-        {
-		$statement = $db->prepare("SELECT * FROM MOVIE_DB WHERE movie Like :movie");
-	    }
+		$query="%".$query."%";
+		if($tag)
+		{
+			$statement = $db->prepare("SELECT * FROM MOVIE_DB WHERE genre Like :movie");
+		}
+		else
+		{
+			$statement = $db->prepare("SELECT * FROM MOVIE_DB WHERE movie Like :movie");
+		}
+
 		$statement->bindValue(":movie" , $query);
 
 		$statement->execute();
-          
+		  
 		$result=array();
 		while($row = $statement->fetch(\PDO::FETCH_ASSOC))
-		{   
+		{
 			$result[] =  $row;
 		}
 
 		return $result;		
+	}
+
+	public static function get_similar_movies($id)
+	{
+		$db = self::get_db();
+
+		$statement = $db->prepare("SELECT * FROM SIM_DB WHERE id = :id");
+		$statement->bindValue(":id" , $id);
+
+		$statement->execute();
+
+		$movies = $statement->fetch(\PDO::FETCH_ASSOC);
+		
+		$info = array();
+		for($i=1; $i<=10 ; $i++)
+		{
+			$info[] = self::get_info($movies[strval($i)]);
+		}
+
+		return $info;
+
+	}
+
+	public static function get_id($username)
+	{
+		$db = self::get_db();
+
+		$statement = $db->prepare("SELECT * FROM USER_DB WHERE username=:username");
+		$statement->bindValue(":username" , $username);
+
+		$statement->execute();
+
+		$info = $statement->fetch(\PDO::FETCH_ASSOC);
+
+		return $info["id"];
+	}
+
+	public static function get_recommended_movies($username)
+	{
+		$id = self::get_id($username);
+
+		$db = self::get_db();
+
+		$statement = $db->prepare("SELECT * FROM RECO_DB WHERE id = :id");
+		$statement->bindValue(":id" , $id);
+
+		$statement->execute();
+
+		$movies = $statement->fetch(\PDO::FETCH_ASSOC);
+		
+		$info = array();
+		for($i=1; $i<=10 ; $i++)
+		{
+			$info[] = self::get_info($movies[strval($i)]);
+		}
+
+		return $info;
+	}
+
+	public static function is_rated($username, $movie)
+	{
+		$user = self::get_id($username);
+
+		$db = self::get_db();
+
+		$statement = $db->prepare("SELECT * FROM LOGS_DB WHERE user = :user AND movie = :movie");
+		$statement->bindValue(":user" , $user);
+		$statement->bindValue(":movie" , $movie);
+
+		$statement->execute();
+
+		$log = $statement->fetch(\PDO::FETCH_ASSOC);
+		
+		if($log)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+
+	}
+
+	public static function update_logs($username, $movie, $rating)
+	{
+		$update = self::is_rated($username, $movie);
+
+		$db = self::get_db();
+
+		$user = self::get_id($username);
+
+		if($update)
+		{
+			$statement = $db->prepare("UPDATE LOGS_DB SET rating = :rating WHERE user=:user AND movie=:movie");
+		}
+		else
+		{
+			$statement = $db->prepare("INSERT INTO LOGS_DB(user, movie, rating) VALUES(:user, :movie, :rating)");
+		}
+
+		$result = $statement->execute(array(
+			"user"=>$user,
+			"movie"=>$movie,
+			"rating"=>$rating));
+
+		if($result)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+	public static function get_rating($username, $movie)
+	{
+		$update = self::is_rated($username, $movie);
+
+		$db = self::get_db();
+
+		$user = self::get_id($username);
+
+		$statement = $db->prepare("SELECT * FROM LOGS_DB WHERE user = :user AND movie = :movie");
+		$statement->bindValue(":user" , $user);
+		$statement->bindValue(":movie" , $movie);
+
+		$statement->execute();
+
+		$log = $statement->fetch(\PDO::FETCH_ASSOC);
+		
+		return $log["rating"];
 	}
 
 }

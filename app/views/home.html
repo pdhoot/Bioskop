@@ -22,6 +22,15 @@
 		</ul>
 		<form action="/" method="get" id="query">
 
+		<p> Top 10 recommended </p>
+
+		<ul>
+			{% for m in reco %}
+			<li><a href="/movie/{{m.id}}">{{m.movie}}</a></li>
+			{% endfor %}
+		</ul>
+		<form action="/" method="get" id="query">
+
 <tr>
 
         <td>Search movie by name</span></td>
@@ -41,7 +50,7 @@
         <td> <input type="hidden" name="tag" value="1"></span></td>
 
         <td>Search movie by tags</span></td>
-        <select name="query">
+    <select name="query">
     <option value="action">action</option>
     <option value="romance">romance</option>
     <option value="comedy">comedy</option>

@@ -10,9 +10,11 @@
 	<h3>Description</h3>
 
 	<h3>Genre</h3>
-	{% for g in genre %}
-	<li>{{g}}</li>
-	{% endfor %}
+	<ul>
+		{% for g in genre %}
+			<li>{{g}}</li>
+		{% endfor %}
+	</ul>
 	<div>
 		
 	</div>
@@ -21,6 +23,43 @@
 	<div>
 		
 	</div>
-	</body>
-	</html>
 
+	{% if rated == true %}
+    	<p> You have already rated this movie! </p>
+	    <p> Feel differently? </p>
+	    <p> {{my_rate}} stars </p>
+	{% endif %}
+
+
+	{% if msg %}
+    	<p>{{msg}}</p>
+	{% endif %}
+
+
+	<form action="/movie/{{info.id}}" method="post" id="rate">
+
+				<tr>
+					<td>
+					<select name="rating">
+				   	<option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				    </select>
+			    	</td>
+		        	<td> <input type="hidden" name="rate" value="1"></span></td>
+				</tr>
+	</form>
+
+	<button type="submit" form="rate" value="Submit">rate</button>
+
+	<h3>Similar Movies</h3>
+	<ul>
+		{% for m in similar %}
+			<li><a href="/movie/{{m.id}}">{{m.movie}}</a></li>
+		{% endfor %}
+	</ul>
+
+	</body>
+</html>
