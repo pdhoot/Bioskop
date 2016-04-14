@@ -29,15 +29,17 @@ class HomeController
 		}
 	}
 	public function post()
-	{  
+	{
+		error_log("asdf");
+
 		if(isset($_POST['login']))
 		{ 
 			$username=$_POST['username'];
 			$password=$_POST['password'];
 			$valid=Users::check_login($username,$password);
+			session_start();
 			if($valid)
 			{
-				session_start();
 				$_SESSION["username"] = $username;
 				header("Location: /");
 			}
@@ -66,6 +68,13 @@ class HomeController
 			{
 				echo "Error!";
 			}
+		}
+		else if(isset($_POST["logout"]))
+		{
+			session_start();
+			session_unset();
+			session_destroy();
+			header("Location: /");
 		}
 	}
 }

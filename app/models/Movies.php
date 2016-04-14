@@ -20,9 +20,7 @@ class Movies
 	{
 		$db = self::get_db();
 
-		$statement = $db->prepare("SELECT * FROM MOVIE_DB ORDER BY rating DESC LIMIT 10");
-		$statement->bindValue(":username" , $username);
-		$statement->bindValue(":passhash" , $passhash);
+		$statement = $db->prepare("SELECT * FROM MOVIE_DB ORDER BY rating DESC LIMIT 9");
 
 		$statement->execute();
 

@@ -4,11 +4,16 @@
 		<!-- <title>{{top}}</title> -->
 	</head>
 	<body>
-		<p> Welcome to Bioskop! </p>
-		<p> Signup or Login </p>
-		<p> Warna bhaad mein jao! </p>
+		<form action="/" method="post" id="logout">
 
-		<p> Top 10 rated movies </p>
+			<tr>
+
+	        	<td> <input type="hidden" name="logout" value="1"></span></td>
+			</tr>
+		</form>
+
+		<button type="submit" form="logout" value="Submit">logout</button>
+		<p> Top 10 rated </p>
 
 		<ul>
 			{% for m in top %}
