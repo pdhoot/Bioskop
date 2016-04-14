@@ -46,5 +46,29 @@ class Movies
 
 		return $info;
 	}
+	public function get_result($query,$tag)
+	{
+		$db = self::get_db();
+        $query="%".$query."%";
+        if($tag)
+        {
+        $statement = $db->prepare("SELECT * FROM MOVIE_DB WHERE genre Like :movie");
+        }
+        else
+        {
+		$statement = $db->prepare("SELECT * FROM MOVIE_DB WHERE movie Like :movie");
+	    }
+		$statement->bindValue(":movie" , $query);
+
+		$statement->execute();
+          
+		$result=array();
+		while($row = $statement->fetch(\PDO::FETCH_ASSOC))
+		{   
+			$result[] =  $row;
+		}
+
+		return $result;		
+	}
 
 }

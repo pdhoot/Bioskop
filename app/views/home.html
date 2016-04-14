@@ -20,5 +20,40 @@
 			<li><a href="/movie/{{m.id}}">{{m.movie}}</a></li>
 			{% endfor %}
 		</ul>
-	</body>
+		<form action="/" method="get" id="query">
+
+<tr>
+
+        <td>Search movie by name</span></td>
+        <td> <input type="hidden" name="get_result" value="1"></span></td>
+        <td> <input type="hidden" name="tag" value="0"></span></td>
+        <td> <input type="text" name="query" id="username" size="20"></span></td>
+
+    </tr>
+
+  
+</form>
+<button type="submit" form="query" value="Submit">Submit</button>
+<form action="/" method="get" id="query2">
+
+<tr>
+     <td> <input type="hidden" name="get_result" value="1"></span></td>
+        <td> <input type="hidden" name="tag" value="1"></span></td>
+
+        <td>Search movie by tags</span></td>
+        <select name="query">
+    <option value="action">action</option>
+    <option value="romance">romance</option>
+    <option value="comedy">comedy</option>
+    <option value="thriller">thriller</option>
+  </select>
+  <input type="submit">
+  <br><br>
+  
+    </tr>
+
+  
+</form>
+
+</body>
 </html>			

@@ -17,16 +17,38 @@ class HomeController
 	{
 		session_start();
 		if(isset($_SESSION["username"]))
-		{
-			$top = Movies::get_top();
-			echo $this->twig->render("home.html" , array(
+		{   
+			if(isset($_GET['get_result']))
+			{
+				$query=$_GET['query'];
+				if($_GET['tag']==0)
+					{
+						$result=Movies::get_result($query,0);
+						$title='All';
+					}
+			    else
+			    	{
+						$result=Movies::get_result($query,1);
+						$title=$_GET['query'];						
+			    	}
+				echo $this->twig->render("result.html",array(
+					"result"=>$result,
+					"title"=>$title));
+			}
+
+			else
+			{
+				$top = Movies::get_top();
+				echo $this->twig->render("home.html" , array(
 				"top" => $top));
+			}
 		}
 		else
 		{
 			echo $this->twig->render("index.html" , array(
 				"title" => "Bioskop"));
 		}
+
 	}
 	public function post()
 	{

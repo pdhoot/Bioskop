@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>{{title}} movies</title>
+	</head>
+
+	<body>
+	<ul>
+	{% for r in result %}
+	<li>{{r.movie}}</li>
+	{% endfor %}
+	</ul>
+	</body>
