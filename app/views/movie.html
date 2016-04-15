@@ -7,7 +7,28 @@
 	<h3>Movie name</h3>
 	<p> {{info.movie}} </p>
 
+	<h3>Icon</h3>
+	{% if info.icon %}
+		<img src="http://image.tmdb.org/t/p/w185{{info.icon}}" />
+    {% else %}
+    	<p>Not Available</p>
+    
+	{% endif %}
 	<h3>Description</h3>
+	{% if info.description %}
+		<p>{{info.description}}</p>
+    {% else %}
+    	<p>Not Available</p>
+    
+	{% endif %}
+
+	<h3>Trailer</h3>
+	{% if info.trailer %}
+		<iframe src="https://www.youtube.com/embed/{{info.trailer}}" width="500px" height="300px"></iframe>
+    {% else %}
+    	<p>Not Available</p>
+	{% endif %}
+
 
 	<h3>Genre</h3>
 	<ul>
@@ -19,7 +40,12 @@
 		
 	</div>
 	<h3>Rating</h3>
-	<p>{{info.rating|number_format(2)}}</p>
+	{% if info.rating == -1 %}
+    	<p>Not Available</p>
+    {% else %}
+		<p>{{info.rating|number_format(2)}}</p>
+    
+	{% endif %}
 	<div>
 		
 	</div>

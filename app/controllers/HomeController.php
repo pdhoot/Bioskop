@@ -17,7 +17,7 @@ class HomeController
 	{
 		session_start();
 		if(isset($_SESSION["username"]))
-		{   
+		{
 			if(isset($_GET['get_result']))
 			{
 				$query=$_GET['query'];
@@ -40,9 +40,15 @@ class HomeController
 			{
 				$top = Movies::get_top();
 				$recommended_movies = Movies::get_recommended_movies($_SESSION["username"]);
+				$count = Movies::get_rating_count($_SESSION["username"]);
+				if($count<5)
+					$condition = false;
+				else
+					$condition = true;
 				echo $this->twig->render("home.html" , array(
 				"top" => $top,
-				"reco"=> $recommended_movies));
+				"reco"=> $recommended_movies,
+				"condition"=>$condition));
 			}
 		}
 		else

@@ -22,14 +22,20 @@
 		</ul>
 		<form action="/" method="get" id="query">
 
-		<p> Top 10 recommended </p>
+		{% if condition == false %}
+    		<p> Please rate atleast 5 Movies to have a better and personalised experience!</p>
+    		<p> Help us to help you! ;) </p>
+    	{% else %}
+			<p> Top 10 recommended </p>
 
-		<ul>
-			{% for m in reco %}
-			<li><a href="/movie/{{m.id}}">{{m.movie}}</a></li>
-			{% endfor %}
-		</ul>
-		<form action="/" method="get" id="query">
+			<ul>
+				{% for m in reco %}
+				<li><a href="/movie/{{m.id}}">{{m.movie}}</a></li>
+				{% endfor %}
+			</ul>
+			<form action="/" method="get" id="query">
+		{% endif %}
+
 
 <tr>
 

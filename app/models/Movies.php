@@ -86,7 +86,7 @@ class Movies
 		$info = array();
 		for($i=1; $i<=10 ; $i++)
 		{
-			$info[] = self::get_info($movies[strval($i)]);
+			$info[] = self::get_info($movies[$i]);
 		}
 
 		return $info;
@@ -205,4 +205,20 @@ class Movies
 		return $log["rating"];
 	}
 
+
+	public static function get_rating_count($username)
+	{
+		$user = self::get_id($username);
+
+		$db = self::get_db();
+
+		$statement = $db->prepare("SELECT COUNT(*) AS cnt FROM LOGS_DB WHERE user = :user");
+		$statement->bindValue(":user" , $user);
+
+		$statement->execute();
+
+		$log = $statement->fetch(\PDO::FETCH_ASSOC);
+		
+		return $log["cnt"];
+	}
 }
