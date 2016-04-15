@@ -36,6 +36,15 @@
 			<form action="/" method="get" id="query">
 		{% endif %}
 
+		<p> 10 new releases </p>
+
+		<ul>
+			{% for m in new %}
+			<li><a href="/movie/{{m.id}}">{{m.movie}}</a></li>
+			{% endfor %}
+		</ul>
+		<form action="/" method="get" id="query">
+
 
 <tr>
 

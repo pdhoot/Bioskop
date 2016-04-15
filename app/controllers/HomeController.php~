@@ -40,9 +40,9 @@ class HomeController
 			{
 				$top = Movies::get_top();
 				$recommended_movies = Movies::get_recommended_movies($_SESSION["username"]);
-				$new_releases = Movies::get_new_releases();
 				$condition = Movies::is_valid($_SESSION["username"]);
 				$condition = intval($condition);
+				var_dump($recommended_movies);
 				if($condition==0)
 					$condition = false;
 				else
@@ -50,8 +50,7 @@ class HomeController
 				echo $this->twig->render("home.html" , array(
 				"top" => $top,
 				"reco"=> $recommended_movies,
-				"condition"=>$condition,
-				"new"=> $new_releases));
+				"condition"=>$condition));
 			}
 		}
 		else

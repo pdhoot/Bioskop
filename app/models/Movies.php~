@@ -234,24 +234,9 @@ class Movies
 		$statement->execute();
 
 		$log = $statement->fetch(\PDO::FETCH_ASSOC);
+		var_dump($user);
+		var_dump($log);
 		
 		return $log["valid"];
-	}
-
-	public static function get_new_releases()
-	{
-		$db = self::get_db();
-
-		$statement = $db->prepare("SELECT * FROM MOVIE_DB ORDER BY time DESC LIMIT 10");
-
-		$statement->execute();
-		
-		$result=array();
-		while($row = $statement->fetch(\PDO::FETCH_ASSOC))
-		{
-			$result[] =  $row;
-		}
-
-		return $result;
 	}
 }
