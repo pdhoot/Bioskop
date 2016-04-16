@@ -40,7 +40,7 @@ class Users
 
 	}
 
-	public static function insert_user($username, $password, $sex='M', $age=0, $occu=1)
+	public static function insert_user($username, $password, $age=0, $occu=1, $sex='M')
 	{
 		$db = self::get_db();
 

@@ -63,7 +63,6 @@ class HomeController
 	}
 	public function post()
 	{
-		error_log("asdf");
 
 		if(isset($_POST['login']))
 		{ 
@@ -77,17 +76,20 @@ class HomeController
 				header("Location: /");
 			}
 			else 
-				echo "sryyy";
+			{
+				echo $this->twig->render("index.html" , array(
+				"title" => "Bioskop",
+				"msg"=>"Invalid userame or password"));
+			}
 		}
 		else if(isset($_POST["sign_up"]))
 		{
 			$username = $_POST['username'];
 			$password = $_POST['password'];
 			// $sex = $_POST['sex'];
-			// $age = $_POST['age'];
-			// $occu = $_POST['occu'];
-
-			$valid = Users::insert_user($username, $password);
+			$age = $_POST['age'];
+			$occu = $_POST['occu'];
+			$valid = Users::insert_user($username, $password,$age, $occu);
 
 			if($valid==2)
 			{
@@ -96,6 +98,7 @@ class HomeController
 			else if($valid==1)
 			{
 				echo "Success!";
+				header("Location: /");
 			}
 			else
 			{
