@@ -64,7 +64,7 @@
 
 			        <input type="hidden" name="logout" value="1">
 			        
-			        <button type="submit" class="btn btn-success btn-sm" form="logout" value="Submit">logout</button>
+			        <button type="submit" class="btn btn-success btn-sm" form="logout" value="Submit">Logout</button>
 
 			        </form>
         			</li>
@@ -82,7 +82,7 @@
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">{{info.movie}}
+                <h1 class="page-header" style="font-family:'Comic Sans MS';" >{{info.movie}}
                 </h1>
             </div>
         </div>
@@ -100,7 +100,7 @@
             </div>
 
             <div class="col-md-9">
-                <h3>Description</h3>
+                <h3 style="font-family:'Comic Sans MS';" >Description</h3>
 
                 {% if info.description %}
 			        <p>{{info.description}}</p>
@@ -109,7 +109,7 @@
 			    {% endif %}
 			</div>
 			<div class="col-md-4">
-                <h3>Genres</h3>
+                <h3 style="font-family:'Comic Sans MS';" >Genres</h3>
                 <ul>
                 {% if genre%}
 			        {% for g in genre %}
@@ -132,7 +132,7 @@
 			<!-- {% endif %} -->
 			<!-- <button></button> -->
 			<div class="col-md-4">
-			 <h3>Average Rating</h3>
+			 <h3 style="font-family:'Comic Sans MS';" >Average Rating</h3>
 			{% if info.rating == -1 %}
 		        <p>Not Available</p>
 		    {% else %}
@@ -174,7 +174,7 @@
         <div class="row">
 
             <div class="col-lg-12">
-                <h3 class="page-header">Similar Movies</h3>
+                <h3 class="page-header" style="font-family:'Comic Sans MS';" >Similar Movies</h3>
             </div>
 
             <!-- <div class="col-sm-3 col-xs-6">

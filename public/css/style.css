@@ -181,7 +181,7 @@ textarea {
   border:0;
   outline:none;
   border-radius:0;
-  padding:2px 10px;
+  padding:10px 10px;
   font-size:20px;
   background:rgba(160, 179, 176, 0.25);
   color:white;
@@ -195,3 +195,5 @@ textarea {
 .our:hover{
   background: rgba(19, 35, 47, 0.9);
 }
+
+.optgroup { font-family: 'Comic Sans MS'; }

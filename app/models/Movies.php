@@ -20,7 +20,7 @@ class Movies
 	{
 		$db = self::get_db();
 
-		$statement = $db->prepare("SELECT * FROM MOVIE_DB ORDER BY rating DESC LIMIT 10");
+		$statement = $db->prepare("SELECT * FROM MOVIE_DB ORDER BY rating DESC LIMIT 12");
 
 		$statement->execute();
 

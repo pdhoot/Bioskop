@@ -64,7 +64,7 @@
 
 			        <input type="hidden" name="logout" value="1">
 			        
-			        <button type="submit" class="btn btn-success btn-sm" form="logout" value="Submit">logout</button>
+			        <button type="submit" class="btn btn-success btn-sm" form="logout" value="Submit">Logout</button>
 
 			        </form>
         			</li>
@@ -133,7 +133,7 @@
         <!-- Portfolio Section -->
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Top movies</h2>
+                <h2 class="page-header" style="font-family:'Comic Sans MS';">Top movies</h2>
             </div>
             {% for m in top %}
 	            <div class="col-md-2 col-sm-3">
@@ -183,15 +183,15 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Recommended for you</h2>
+                <h2 class="page-header" style="font-family:'Comic Sans MS';">Recommended for you</h2>
             </div>
             {% if condition == 0 %}
-            <div class="col-md-6">
+            <div class="col-md-6" style="font-family:'Comic Sans MS';">
             <p> Please rate atleast 5 Movies to have a better and personalised experience!</p>
             <p> Help us to help you! ;) </p>
             </div>
             {% elseif condition == 1 %}
-            <div class="col-md-6">
+            <div class="col-md-6" style="font-family:'Comic Sans MS';">
             <p> It takes a while for us to fetch the best recommendations for you!</p>
             <p> Stay tuned! We will add them soon! </p>
             </div>
@@ -201,9 +201,9 @@
 	            <div class="thumbnail">
 	                <a href="/movie/{{m.id}}">
 	                    {% if m.icon %} 
-	                    <img class="img-responsive img-portfolio img-hover" src="http://image.tmdb.org/t/p/w185{{m.icon}}" alt="">
+	                    <img class="img-responsive img-portfolio img-hover" src="http://image.tmdb.org/t/p/w185{{m.icon}}" alt="" style="height: 278px;">
 	                    {% else %}
-	                    <img class="img-responsive img-portfolio img-hover" src="http://allseasonsautoracks.com/wp-content/uploads/2013/12/th.jpg" alt="">
+	                    <img class="img-responsive img-portfolio img-hover" src="https://s22.postimg.org/tzukkur1d/13045678_1287104944693725_1040959616_n.jpg" alt="" style="height: 278px;">
 	                    {% endif %}
 	                </a>
 	                <div class="caption" style="text-overflow: ellipsis; overflow:hidden; white-space:nowrap;">
@@ -281,7 +281,7 @@
 						
 						<input type="hidden" name="get_result" value="1">
 						<input type="hidden" name="tag" value="1">
-						<h3>
+						<h3 style="font-family:'Comic Sans MS';">
 						Search movie by tags
 						</h3>
 					    <select name="query" class="btn btn-default btn-sm">
@@ -303,8 +303,8 @@
 
         <!-- Footer -->
         <footer>
-            <div class="row">
-                <div class="col-lg-12">
+            <div class="row" style="align-content:center;">
+                <div class="col-lg-12" style="font-family:'Comic Sans MS';">
                     <p>Copyright &copy; Suraj Shiva Saleel Punit 2016 </p>
                 </div>
             </div>

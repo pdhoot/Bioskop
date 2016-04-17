@@ -46,7 +46,7 @@ class HomeController
 				if($condition==0)
 					$val = 0;
 				else
-					$val = 2;
+					$$val = 2;
 				$count = Movies::get_rating_count($_SESSION["username"]);
 				$count = intval($count);
 				if($count>=5)
