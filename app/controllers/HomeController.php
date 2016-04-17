@@ -44,13 +44,17 @@ class HomeController
 				$condition = Movies::is_valid($_SESSION["username"]);
 				$condition = intval($condition);
 				if($condition==0)
-					$condition = false;
+					$val = 0;
 				else
-					$condition = true;
+					$condition = 2;
+				$count = Movies::get_rating_count($_SESSION["username"]);
+				$count = intval($count);
+				if($count>=5)
+					$val++;
 				echo $this->twig->render("home.html" , array(
 				"top" => $top,
 				"reco"=> $recommended_movies,
-				"condition"=>$condition,
+				"condition"=>$val,
 				"new"=> $new_releases));
 			}
 		}
