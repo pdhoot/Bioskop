@@ -84,7 +84,7 @@ class Movies
 		$movies = $statement->fetch(\PDO::FETCH_ASSOC);
 		
 		$info = array();
-		for($i=1; $i<=10 ; $i++)
+		for($i=1; $i<=6 ; $i++)
 		{
 			$info[] = self::get_info($movies[$i]);
 		}

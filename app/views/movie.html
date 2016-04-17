@@ -1,91 +1,264 @@
 <!DOCTYPE HTML>
-<html>
-	<head>
-		<title>{{title}}</title>
-	</head>
+<html lang="en">
+	
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{{title}}</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../css/modern-business.css" rel="stylesheet">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
+
+    <link rel="stylesheet" type="text/css" href="../css/home.css">
+    <!-- Custom Fonts -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
 	<body>
-	<h3>Movie name</h3>
-	<p> {{info.movie}} </p>
 
-	<h3>Icon</h3>
-	{% if info.icon %}
-		<img src="http://image.tmdb.org/t/p/w185{{info.icon}}" />
-    {% else %}
-    	<p>Not Available</p>
-    
-	{% endif %}
-	<h3>Description</h3>
-	{% if info.description %}
-		<p>{{info.description}}</p>
-    {% else %}
-    	<p>Not Available</p>
-    
-	{% endif %}
+	<!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/" style="font-size: 24px;" >Bioskop</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="padding-top: 10px;">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                    	<form action="/" method="get" id="query">
+            			<input type="hidden" name="get_result" value="1">
+				        <input type="hidden" name="tag" value="0">
+				        <input type="text" placeholder="Movies" name="query" id="username" size="20">
+				        <button type="submit" class="btn btn-success btn-sm" form="query" value="Submit">Search</button>
+				        </form>
+                        
+                    </li>
 
-	<h3>Trailer</h3>
-	{% if info.trailer %}
-		<iframe src="https://www.youtube.com/embed/{{info.trailer}}" width="500px" height="300px"></iframe>
-    {% else %}
-    	<p>Not Available</p>
-	{% endif %}
+                    <li>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    </li>
 
+                    <li>
+                    <form action="/" method="post" id="logout">
 
-	<h3>Genre</h3>
-	<ul>
-		{% for g in genre %}
-			<li>{{g}}</li>
-		{% endfor %}
-	</ul>
-	<div>
-		
-	</div>
-	<h3>Rating</h3>
-	{% if info.rating == -1 %}
-    	<p>Not Available</p>
-    {% else %}
-		<p>{{info.rating|number_format(2)}}</p>
-    
-	{% endif %}
-	<div>
-		
-	</div>
+			        <input type="hidden" name="logout" value="1">
+			        
+			        <button type="submit" class="btn btn-success btn-sm" form="logout" value="Submit">logout</button>
 
-	{% if rated == true %}
-    	<p> You have already rated this movie! </p>
-	    <p> Feel differently? </p>
-	    <p> {{my_rate}} stars </p>
-	{% endif %}
+			        </form>
+        			</li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
 
-	{% if msg %}
-    	<p>{{msg}}</p>
-	{% endif %}
+	<!-- Page Content -->
+    <div class="container">
 
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{{info.movie}}
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
 
-	<form action="/movie/{{info.id}}" method="post" id="rate">
+        <!-- Portfolio Item Row -->
+        <div class="row">
 
-				<tr>
-					<td>
-					<select name="rating">
-				   	<option value="1">1</option>
-				    <option value="2">2</option>
-				    <option value="3">3</option>
-				    <option value="4">4</option>
-				    <option value="5">5</option>
-				    </select>
-			    	</td>
-		        	<td> <input type="hidden" name="rate" value="1"></span></td>
-				</tr>
-	</form>
+            <div class="col-md-3">
+                {% if info.icon %}
+			        <img src="http://image.tmdb.org/t/p/w185{{info.icon}}" />
+			    {% else %}
+			        <img src="https://s22.postimg.org/tzukkur1d/13045678_1287104944693725_1040959616_n.jpg" />
+			    {% endif %}
+            </div>
 
-	<button type="submit" form="rate" value="Submit">rate</button>
+            <div class="col-md-9">
+                <h3>Description</h3>
 
-	<h3>Similar Movies</h3>
-	<ul>
-		{% for m in similar %}
-			<li><a href="/movie/{{m.id}}">{{m.movie}}</a></li>
-		{% endfor %}
-	</ul>
+                {% if info.description %}
+			        <p>{{info.description}}</p>
+			    {% else %}
+			        <p>Not Available</p>
+			    {% endif %}
+			</div>
+			<div class="col-md-4">
+                <h3>Genres</h3>
+                <ul>
+                {% if genre%}
+			        {% for g in genre %}
+			            <li>{{g}}</li>
+			        {% endfor %}
+			    {% else %}
+			    	N/A
+			    {% endif %}
+			    </ul>
+			    <br>
+	    		<br>
+				{% if info.trailer %}
+					<button class="video-link btn btn-lg btn-primary" data-video-id="{{info.trailer}}">Watch Trailer</button>
+                {% else %}
+                <p> <b>Trailer </b>not available </p>
+	            {% endif %}
+			</div> 	
+		    <!-- {% if m.trailer %} -->
+		    
+			<!-- {% endif %} -->
+			<!-- <button></button> -->
+			<div class="col-md-4">
+			 <h3>Average Rating</h3>
+			{% if info.rating == -1 %}
+		        <p>Not Available</p>
+		    {% else %}
+                {% if info.rating == 0 %}
+                    <p>N/A</p>
+                {% else %}
+		        <p>{{info.rating|number_format(2)}}</p>
+                {% endif %}
+		    {% endif %}
+		    <br>
+		    {% if rated == true %}
+		        <p> You have already rated this movie! </p>
+		        <p> Feel differently? </p>
+		    {% else %}
+		    	<p>Wached it already?<br>Rate the movie</p>
+		    {% endif %}
+			<form action="/movie/{{info.id}}" method="post" id="rate">
+					 <input type="hidden" name="rate" value="1"></span></td>
+			 		<input type="number" name="rating"  id="some_id" value="{{my_rate}}" class="rating" />
+			 		<button type="submit" class="btn btn-success" form="rate" value="Submit">Rate</button>
+  		  </form>
 
-	</body>
+  		  	
+  		  </div>
+  		  	
+
+  		  	<!-- <div class="col-md-9">
+  		  	<br>
+    		<br>
+			{% if info.trailer %}
+				<button class="video-link btn btn-lg btn-primary" data-video-id="{{info.trailer}}">Watch Trailer</button>
+            {% endif %}
+            </div> -->
+           
+        </div>
+        <!-- /.row -->
+
+        <!-- Related Projects Row -->
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h3 class="page-header">Similar Movies</h3>
+            </div>
+
+            <!-- <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div> -->
+            {% for m in similar %}
+	            <div class="col-md-2 col-sm-3">
+	            <div class="thumbnail">
+	                <a href="/movie/{{m.id}}">
+	                    {% if m.icon %} 
+	                    <img class="img-responsive img-portfolio img-hover" src="http://image.tmdb.org/t/p/w185{{m.icon}}" alt="" style="height: 278px;">
+	                    {% else %}
+	                    <img class="img-responsive img-portfolio img-hover" src="https://s22.postimg.org/tzukkur1d/13045678_1287104944693725_1040959616_n.jpg" alt="" style="height: 278px;">
+	                    {% endif %}
+	                </a>
+	                <div class="caption" style="text-overflow: ellipsis; overflow:hidden;  white-space:nowrap;">
+	                {{m.movie}}
+	                </div>
+	            </div>
+	                <!-- {{m.movie}} -->
+	            </div>
+            {% endfor %}
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Suraj Shiva Saleel Punit Saurabh 2016</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/jquery.js"></script>
+
+    <script src="../js/bootstrap.min.js"></script>
+
+</body>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="../js/videoLightning.js"></script>
+<script src="../js/star-rating.min.js"></script>
+<script src="../js/bootstrap-rating-input.min.js" type="text/javascript"></script>
+<script>
+  videoLightning({settings: {autoplay: true, color: "white"}, element: ".video-link"});
+</script>
+<script>
+  $(function() {
+    $(".rslides").responsiveSlides();
+  });
+	// $("#input-id").rating();
+	 
+	// // with plugin options
+	// $("#input-id").rating({min:1, max:10, step:2, size:'lg'});
+</script>
+
 </html>

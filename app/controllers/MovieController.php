@@ -57,7 +57,7 @@ class MovieController
 					$msg = "Rating failed!";
 					$rated = false;
 				}
-
+				$similar_movies = Movies::get_similar_movies($movie);
 				echo $this->twig->render("movie.html" , array(
 					"info" => $info,
 					"title"=> $info["movie"],

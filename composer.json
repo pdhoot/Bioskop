@@ -3,7 +3,8 @@
 	"desciption":"Movie platform : SE project",
 	"require":{
 		"torophp/torophp":	"dev-master",
-		"twig/twig":"1.*"
+		"twig/twig":"1.*",
+		"kartik-v/bootstrap-star-rating": "@dev"
 	},
 	"require-dev":{
 
@@ -15,4 +16,3 @@
 		}
 	}	
 }
- 

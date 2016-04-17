@@ -1,93 +1,334 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-	<link rel="stylesheet" type="text/css" href="css/home.css">
-		<!-- <title>{{top}}</title> -->
-		
-	</head>
-	<body>
-		<form action="/" method="post" id="logout">
+<!DOCTYPE html>
+<html lang="en">
 
-			<tr>
+<head>
 
-	        	<td> <input type="hidden" name="logout" value="1"></span></td>
-			</tr>
-		</form>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-		<button type="submit" form="logout" value="Submit">logout</button>
-		<p> Top 10 rated </p>
+    <title>{{title}}</title>
 
-		<ul>
-			{% for m in top %}
-			<li><a href="/movie/{{m.id}}">{{m.movie}}</a></li>
-			{% endfor %}
-		</ul>
-		<form action="/" method="get" id="query">
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-		{% if condition == false %}
-    		<p> Please rate atleast 5 Movies to have a better and personalised experience!</p>
-    		<p> Help us to help you! ;) </p>
-    	{% else %}
-			<p> Top 10 recommended </p>
+    <!-- Custom CSS -->
+    <link href="css/modern-business.css" rel="stylesheet">
 
-			<ul>
-				{% for m in reco %}
-				<li><a href="/movie/{{m.id}}">{{m.movie}}</a></li>
-				{% endfor %}
-			</ul>
-			<form action="/" method="get" id="query">
-		{% endif %}
+    <link rel="stylesheet" type="text/css" href="css/home.css">
+    <!-- Custom Fonts -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-		<p> 10 new releases </p>
-		
-		<ul class="rslides">
-			{% for m in new %}
-			<li><a href="/movie/{{m.id}}"><img src="http://image.tmdb.org/t/p/w185{{m.icon}}" style="width:100%; height:450px;padding:5% 5% 5% 5%;"></a></li>
-			{% endfor %}
-		</ul>
-		<form action="/" method="get" id="query">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/" style="font-size: 24px;">Bioskop</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="padding-top: 10px;">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                    	<form action="/" method="get" id="query">
+            			<input type="hidden" name="get_result" value="1">
+				        <input type="hidden" name="tag" value="0">
+				        <input type="text" placeholder="Movies" name="query" id="username" size="20">
+				        <button type="submit" class="btn btn-success btn-sm" form="query" value="Submit">Search</button>
+				        </form>
+                        
+                    </li>
+                    
+                    <li>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    </li>
+                    <li>
+                    <form action="/" method="post" id="logout">
+
+			        <input type="hidden" name="logout" value="1">
+			        
+			        <button type="submit" class="btn btn-success btn-sm" form="logout" value="Submit">logout</button>
+
+			        </form>
+        			</li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Header Carousel -->
+    <!-- <header id="myCarousel" class="carousel slide">
+        
+        <ul class="rslides">
+            {% for m in new %}
+            <li><a href="/movie/{{m.id}}"><img src="http://image.tmdb.org/t/p/w185{{m.icon}}" style="width:100%; height:340px;padding:20px 20px;" align="middle"></a></li>
+            {% endfor %}
+        </ul>
+    </header> -->
+
+    <!-- Header Carousel -->
+    <header id="myCarousel" class="carousel slide" style="height:400px;"> 
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
+            <li data-target="#myCarousel" data-slide-to="5"></li>
+            <li data-target="#myCarousel" data-slide-to="6"></li>
+            <li data-target="#myCarousel" data-slide-to="7"></li>
+            <li data-target="#myCarousel" data-slide-to="8"></li>
+            <li data-target="#myCarousel" data-slide-to="9"></li>
+            <!-- <li data-target="#myCarousel" data-slide-to="10"></li>  -->
+        </ol> 
+
+        <div class="carousel-inner">
+            <div class="item active">
+                <a href="/movie/{{new[0].id}}"><div class="fill" style=" border-right: 200px solid #e8e8e8; border-left: 200px solid #e8e8e8; background-image:url('{{new[0].coverpic}}'); "></div></a>
+                <div class="carousel-caption">
+                    <h2>{{new[0].movie}}</h2>
+                </div>
+            </div>
+            {% for m in new[1:]%}
+            <div class="item">
+                <a href="/movie/{{m.id}}"><div class="fill" style=" border-right: 200px solid #e8e8e8; border-left: 200px solid #e8e8e8; background-image:url('{{m.coverpic}}'); ">
+                </div></a>
+                <div class="carousel-caption">
+                    <h2>{{m.movie}}</h2>
+                </div>
+            </div>
+            {% endfor %} 
+        </div> 
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+    </header>
+ 
+
+        <!-- Portfolio Section -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Top movies</h2>
+            </div>
+            {% for m in top %}
+	            <div class="col-md-2 col-sm-3">
+	            <div class="thumbnail">
+	                <a href="/movie/{{m.id}}">
+	                	{% if m.icon %} 
+	                    <img class="img-responsive img-portfolio img-hover" src="http://image.tmdb.org/t/p/w185{{m.icon}}" alt="" style="height: 278px;">
+	                    {% else %}
+	                    <img class="img-responsive img-portfolio img-hover" src="https://s22.postimg.org/tzukkur1d/13045678_1287104944693725_1040959616_n.jpg" alt="" style="height: 278px;">
+	                    {% endif %}
+	                </a>
+	                <div class="caption" style="text-overflow: ellipsis; overflow:hidden;  white-space:nowrap;">
+	                {{m.movie}}
+	                </div>
+	            </div>
+	                <!-- {{m.movie}} -->
+	            </div>
+            {% endfor %}
+
+            <!-- <div class="col-md-4 col-sm-6">
+                <a href="portfolio-item.html">
+                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <a href="portfolio-item.html">
+                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <a href="portfolio-item.html">
+                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <a href="portfolio-item.html">
+                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <a href="portfolio-item.html">
+                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                </a>
+            </div> -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Recommended for you</h2>
+            </div>
+            {% if condition == false %}
+            <div class="col-md-6">
+            <p> Please rate atleast 5 Movies to have a better and personalised experience!</p>
+            <p> Help us to help you! ;) </p>
+            </div>
+        	{% else %}
+            {% for m in reco %}
+	            <div class="col-md-2 col-sm-4">
+	            <div class="thumbnail">
+	                <a href="/movie/{{m.id}}">
+	                    {% if m.icon %} 
+	                    <img class="img-responsive img-portfolio img-hover" src="http://image.tmdb.org/t/p/w185{{m.icon}}" alt="">
+	                    {% else %}
+	                    <img class="img-responsive img-portfolio img-hover" src="http://allseasonsautoracks.com/wp-content/uploads/2013/12/th.jpg" alt="">
+	                    {% endif %}
+	                </a>
+	                <div class="caption" style="text-overflow: ellipsis; overflow:hidden; white-space:nowrap;">
+	                {{m.movie}}
+	                </div>
+	            </div>
+	                <!-- {{m.movie}} -->
+	            </div>
+
+            {% endfor %}
+            {% endif %}
+            <!-- <div class="col-md-4 col-sm-6">
+                <a href="portfolio-item.html">
+                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <a href="portfolio-item.html">
+                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <a href="portfolio-item.html">
+                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <a href="portfolio-item.html">
+                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <a href="portfolio-item.html">
+                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                </a>
+            </div> -->
+        </div>
 
 
-<tr>
+        <!-- Features Section -->
+        <!-- <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Tags</h2>
+            </div>
+            <div class="col-md-6">
+                <p>The Modern Business template by Start Bootstrap includes:</p>
+                <ul>
+                    <li><strong>Bootstrap v3.2.0</strong>
+                    </li>
+                    <li>jQuery v1.11.0</li>
+                    <li>Font Awesome v4.1.0</li>
+                    <li>Working PHP contact form with validation</li>
+                    <li>Unstyled page elements for easy customization</li>
+                    <li>17 HTML pages</li>
+                </ul>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
+            </div>
+            <div class="col-md-6">
+                <img class="img-responsive" src="http://placehold.it/700x450" alt="">
+            </div>
+        </div> -->
+        <!-- /.row -->
+        <hr>
+        
+        <div>
+        <!-- Call to Action Section -->
+        <div class="well">
+            <div class="row">
+                <!-- <div class="col-md-8">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
+                </div> -->
+                <div class="col-md-4">
+                	<form action="/" method="get" id="query2">
 
-        <td>Search movie by name</span></td>
-        <td> <input type="hidden" name="get_result" value="1"></span></td>
-        <td> <input type="hidden" name="tag" value="0"></span></td>
-        <td> <input type="text" name="query" id="username" size="20"></span></td>
+						
+						<input type="hidden" name="get_result" value="1">
+						<input type="hidden" name="tag" value="1">
+						<h3>
+						Search movie by tags
+						</h3>
+					    <select name="query" class="btn btn-default btn-sm">
+						    <option value="action">action</option>
+						    <option value="romance">romance</option>
+						    <option value="comedy">comedy</option>
+						    <option value="thriller">thriller</option>
+						</select>
+						<button type="submit" class="btn btn-success btn-sm" value="Submit">Search</button>
+						<br><br>
+						  
+					</form>
+                    <!-- <a class="btn btn-lg btn-default btn-block" href="#">Call to Action</a> -->
+                </div>
+            </div>
+        </div>
+        </div>
+        <hr>
 
-    </tr>
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Suraj Shiva Saleel Punit Saurabh 2016 </p>
+                </div>
+            </div>
+        </footer>
 
-  
-</form>
-<button type="submit" form="query" value="Submit">Submit</button>
-<form action="/" method="get" id="query2">
+    </div>
+    <!-- /.container -->
 
-<tr>
-     <td> <input type="hidden" name="get_result" value="1"></span></td>
-        <td> <input type="hidden" name="tag" value="1"></span></td>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
 
-        <td>Search movie by tags</span></td>
-    <select name="query">
-    <option value="action">action</option>
-    <option value="romance">romance</option>
-    <option value="comedy">comedy</option>
-    <option value="thriller">thriller</option>
-  </select>
-  <input type="submit">
-  <br><br>
-  
-    </tr>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 
-  
-</form>
+    <!-- Script to Activate the Carousel -->
+   
 
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
 <script src="js/responsiveslides.min.js"></script>
 <script>
   $(function() {
     $(".rslides").responsiveSlides();
   });
 </script>
-</html>			
+ <script>
+    $('.carousel').carousel({
+        interval: 1500 //changes the speed
+    });
+</script>
+</html>
